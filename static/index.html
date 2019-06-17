@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>舆情分析系统</title>
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><strong>舆情分析系统</strong></a>
+
+            <div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+        </ul>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a class="active-menu" href="index.html"><i class="fa fa-dashboard"></i> 主页</a>
+                </li>
+            </ul>
+
+        </div>
+
+    </nav>
+    <!-- /. NAV SIDE  -->
+
+    <div id="page-wrapper" style="min-height: 0;">
+        <div class="header">
+            <h1 class="page-header">
+                主页
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="index.html">主页</a></li>
+                <li class="active">选择话题</li>
+            </ol>
+
+        </div>
+        <div id="page-inner" style="min-height: 0;">
+            <div class="row">
+                <div class="col-xs-8 col-md-8 col-md-offset-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-lg" placeholder="输入关键词">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-lg" type="button">分析</button>
+                        </span>
+                    </div><!-- /input-group -->
+                </div><!-- /.col-lg-6 -->
+            </div><!-- /.row -->
+            <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            #基因编辑婴儿#
+                        </div>
+                        <div class="panel-body">
+                            <div id="cloud_1" style="height: 300px;"></div>
+                            <div>
+                                <div style="float: left;width: 25%;text-align: center;">
+                                    <strong id="weibo_count_1">-</strong><br>
+                                    <small>微博</small>
+                                </div>
+                                <div style="float: left;width: 25%;text-align: center;">
+                                    <strong id="reposts_count_1">-</strong><br>
+                                    <small>转发</small>
+                                </div>
+                                <div style="float: left;width: 25%;text-align: center;">
+                                    <strong id="comments_count_1">-</strong><br>
+                                    <small>评论</small>
+                                </div>
+                                <div style="float: left;width: 25%;text-align: center;">
+                                    <strong id="attitudes_count_1">-</strong><br>
+                                    <small>点赞</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer"><a href="chart_emotion.html?key=基因编辑婴儿">详细信息</a></div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            #非洲猪瘟#
+                        </div>
+                        <div class="panel-body">
+                            <div id="cloud_2" style="height: 300px;"></div>
+                            <div>
+                                <div style="float: left;width: 25%;text-align: center;">
+                                    <strong id="weibo_count_2">-</strong><br>
+                                    <small>微博</small>
+                                </div>
+                                <div style="float: left;width: 25%;text-align: center;">
+                                    <strong id="reposts_count_2">-</strong><br>
+                                    <small>转发</small>
+                                </div>
+                                <div style="float: left;width: 25%;text-align: center;">
+                                    <strong id="comments_count_2">-</strong><br>
+                                    <small>评论</small>
+                                </div>
+                                <div style="float: left;width: 25%;text-align: center;">
+                                    <strong id="attitudes_count_2">-</strong><br>
+                                    <small>点赞</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer"><a href="chart_emotion.html?key=非洲猪瘟">详细信息</a></div>
+                    </div>
+                </div>
+            </div><!--/.row-->
+            <!-- /. ROW  -->
+            <footer><p>© 软件152 杨凯红 153235 的毕业设计</p></footer>
+
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script src="https://libs.baidu.com/jquery/1.10.2/jquery.js"></script>
+<!-- Bootstrap Js -->
+<script src="https://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Js -->
+<script src="assets/js/jquery.metisMenu.js"></script>
+
+<!-- Echart -->
+<script src="https://echarts.baidu.com/dist/echarts.min.js"></script>
+<script src="assets/js/echarts-wordcloud.min.js"></script>
+<!-- Custom Js -->
+<script src="assets/js/custom-scripts.js"></script>
+
+<script>
+    var db_names = ["基因编辑婴儿", "非洲猪瘟"];
+    var clouds = [echarts.init(document.getElementById('cloud_1')), echarts.init(document.getElementById('cloud_2'))];
+    var weibo_counts = ["#weibo_count_1", "#weibo_count_2"];
+    var repost_counts = ['#reposts_count_1', '#reposts_count_2'];
+    var comment_counts = ['#comments_count_1', '#comments_count_2'];
+    var attitude_counts = ['#attitudes_count_1', '#attitudes_count_2'];
+
+    function createRandomItemStyle() {
+        return {
+            normal: {
+                color: 'rgb(' + [
+                    Math.round(Math.random() * 160),
+                    Math.round(Math.random() * 160),
+                    Math.round(Math.random() * 160)
+                ].join(',') + ')'
+            }
+        };
+    }
+
+    for (var i = 0; i < 2; ++i) {
+        (function (i) {
+            $.get('hot_words?key=' + db_names[i], function (result) {
+                var data = jQuery.parseJSON(result);
+                var option = {
+                    tooltip: {
+                        show: true
+                    },
+                    series: [{
+                        name: '字符云',
+                        type: 'wordCloud',
+                        size: ['100%', '100%'],
+                        textRotation: [0, 45, 90, -45],
+                        textPadding: 0,
+                        autoSize: {
+                            enable: true,
+                            minSize: 11
+                        },
+                        data: (function () {
+                            list = [];
+                            $.each(data, function (key, value) {
+                                a = Object();
+                                a.name = value.name;
+                                a.value = value.value;
+                                a.textStyle = createRandomItemStyle();
+                                list.push(a);
+                            });
+                            console.log(list);
+                            return list;
+                        })()
+                    }]
+                };
+                clouds[i].setOption(option);
+            });
+            $.get('basic_info?key=' + db_names[i], function (result) {
+                var data = jQuery.parseJSON(result);
+                $(weibo_counts[i]).text(data.weibo);
+                $(repost_counts[i]).text(data.reposts);
+                $(comment_counts[i]).text(data.comments);
+                $(attitude_counts[i]).text(data.attitudes);
+            })
+        })(i);
+    }
+
+</script>
+</body>
+</html>

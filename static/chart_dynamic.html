@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>动态分析 - 舆情分析系统</title>
+    <!-- Bootstrap Styles-->
+    <link href="https://libs.baidu.com/bootstrap/3.3.4/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <!-- Echart的Boostrap.TabContent样式补丁-->
+    <style type="text/css">
+        .tab-content > .tab-pane,
+        .pill-content > .pill-pane {
+            display: block;
+            height: 0;
+            overflow-y: hidden;
+        }
+
+        .tab-content > .active,
+        .pill-content > .active {
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><strong>舆情分析系统</strong></a>
+        </div>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+
+                <li>
+                    <a href="index.html"><i class="fa fa-dashboard"></i> 主页</a>
+                </li>
+                <li>
+                    <a href="chart_static.html"><i class="fa fa-desktop"></i> 静态分析</a>
+                </li>
+                <li>
+                    <a href="chart_dynamic.html" class="active-menu"><i class="fa fa-bar-chart-o"></i> 动态分析</a>
+                </li>
+                <li>
+                    <a href="chart_emotion.html"><i class="fa fa-qrcode"></i> 情感分析</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper">
+        <div class="header">
+            <h1 class="page-header">
+                动态分析
+                <small>基因编辑婴儿</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="index.html">主页</a></li>
+                <li>基因编辑婴儿</li>
+                <li class="active">情感分析</li>
+            </ol>
+        </div>
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            微博和评论总量
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#home" data-toggle="tab">1天</a>
+                                </li>
+                                <li class=""><a href="#profile" data-toggle="tab">3天</a>
+                                </li>
+                                <li class=""><a href="#messages" data-toggle="tab">7天</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="home">
+                                    <div id="weibo-count-graph-1" style="height: 400px;"></div>
+                                </div>
+                                <div class="tab-pane fade" id="profile">
+                                    <div id="weibo-count-graph-2" style="height: 400px;"></div>
+                                </div>
+                                <div class="tab-pane fade" id="messages">
+                                    <div id="weibo-count-graph-3" style="height: 400px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            评论数量分布
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#C1" data-toggle="tab">全部</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="C1">
+                                    <div id="user-comment-line-chart" style="height: 400px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <footer><p>Copyright &copy; 2016.Company name All rights reserved.More Templates</p></footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<!--<script src="assets/js/jquery-1.10.2.js"></script>-->
+<script src="https://libs.baidu.com/jquery/1.10.2/jquery.js"></script>
+<!-- Bootstrap Js -->
+<!--<script src="assets/js/bootstrap.min.js"></script>-->
+<script src="https://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<!-- Metis Menu Js -->
+<script src="assets/js/jquery.metisMenu.js"></script>
+<!-- Echart -->
+<script src="https://echarts.baidu.com/dist/echarts.min.js"></script>
+
+<!--图表初始化-->
+<script>
+    // 官方微博数量变化
+    // 基于准备好的dom，初始化echarts实例
+    var weiboCountChart1 = echarts.init(document.getElementById('weibo-count-graph-1'));
+    var weiboCountChart2 = echarts.init(document.getElementById('weibo-count-graph-2'));
+    var weiboCountChart3 = echarts.init(document.getElementById('weibo-count-graph-3'));
+    var weiboCountCharts = [weiboCountChart1, weiboCountChart2, weiboCountChart3];
+    period = [1, 3, 7];
+    for (i = 0; i < 3; ++i) {
+        (function (i) {
+            $.get("weibo_count/" + period[i], function (result) {
+                var data = jQuery.parseJSON(result);
+                // 指定图表的配置项和数据
+                var option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['微博', '评论']
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    calculable: true,
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: data['time']
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value'
+                        }, {
+                            type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            name: '微博',
+                            type: 'line',
+                            stack: '总量',
+                            yAxisIndex: '0',
+                            data: data['weibo']
+                        },
+                        {
+                            name: '评论',
+                            type: 'line',
+                            stack: '总量',
+                            yAxisIndex: '1',
+                            data: data['comment']
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                weiboCountCharts[i].setOption(option);
+            });
+        })(i);
+    }
+
+    // 用户评论分布
+    var userCommentLineChart = echarts.init(document.getElementById('user-comment-line-chart'));
+    $.get("comment_distribution", function (result) {
+        var data = jQuery.parseJSON(result)['all'];
+        console.log(data);
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                formatter: function (params) {
+                    if (data[0][0] === 0)
+                        i = params[0].dataIndex + 1;
+                    else
+                        i = params[0].dataIndex;
+                    return "评论数量: " + data[i][0] + "<br>出现次数: " + data[i][1];
+                }
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {show: true},
+                    dataView: {show: true, readOnly: false},
+                    magicType: {show: true, type: ['line', 'bar']},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            calculable: true,
+            xAxis: [
+                {
+                    type: 'log',
+                    name: '评论数量'
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '次数'
+                }
+            ],
+            series: [
+                {
+                    name: "",
+                    type: 'line',
+                    data: function () {
+                        d = data;
+                        r = [];
+                        for (var j = 0, len = d.length; j < len; j++) {
+                            if (d[j][0] === 0) continue;
+                            // r.push([Math.log10(d[j][0]), d[j][1]]);
+                            r.push([d[j][0], d[j][1]]);
+                        }
+                        return r;
+                    }()
+                }
+            ]
+        };
+        userCommentLineChart.setOption(option);
+    });
+
+    window.addEventListener("resize", function () {
+        weiboCountChart1.resize();
+        weiboCountChart2.resize();
+        weiboCountChart3.resize();
+        userCountPie.resize();
+        userPieChart1.resize();
+        userPieChart2.resize();
+        userPieChart3.resize();
+        userCommentLineChart.resize();
+        userCommentPieChart.resize();
+    });
+</script>
+
+<!-- Custom Js -->
+<script src="assets/js/custom-scripts.js"></script>
+
+
+</body>
+</html>
